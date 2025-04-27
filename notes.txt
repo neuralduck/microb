@@ -1,0 +1,107 @@
+microb language reference (pronounced micro bee or microbe)
+-----------------------------
+
+The idea is to create a small, simple, BASIC like toy language with static types (eventually) and an imperative programming paradigm.
+"BASIC like" in that it follows a similar simple design but nothing more. 
+The objective of this language is to teach myself how compilers and computers work. I've been using them for about 15 years now and I have no idea.
+
+
+sample microb code:
+-----------------------
+
+#this is a comment
+
+print("this is a string");
+
+print("this is a string with a variable referenced {variable_name}"); # single variable or comma separated variables only. no expressions, calculate those separately.
+
+print("every statement is terminated with a ;");
+
+data types: null, number num, string str, list, vector, (booleans? - 1/0 or True/False) - all numbers are floats and they will be bfloat16 eventually or even a smaller representation.
+all numbers are signed. (unsigned will be added?)
+variables have a block scope - no globals.
+
+b:num = 10; #
+c:str = "c";
+d:str = "all characters and strings are created using double quotes only";
+
+f:[4] = [1, 2, 3, 4]; #all elements in a list should be of the same type
+
+g:<3> = [1.0, 2.0, 3.0];#has methods .push, .pop to add or remove elements in an index or to the right - future
+
+Reserved Keywords: if, else, while, break, fn, return, print, null, true, false
+
+Operators supported
+-------------------
+addition	+	r = a+b
+
+subtraction	-	r = a-b
+
+multiplication	*	r = a*b
+
+division	/	r = a/b
+
+modulo		%	r = a%b
+
+exponentiation	^	r = a^b; (as the language evolves a^-b will be 1/a^b)
+
+assignment	=	r = 8;
+
+equal		==	a == b;
+
+not equal	!=	a != b;
+
+parentheses	()	a = (b+2)*5;
+
+logical and	&	a & b;
+
+logical or	|	a | b;
+
+logical not	!	!a;
+
+greater than	>	a > b;
+
+less than	<	a < b;
+
+greater than or 
+equal		>=	a >= b;
+
+less than or
+equal		<=	a <= b;
+
+constants such as pi, e and phi - future
+vector operations on lists and dynamic lists- future
+
+
+Other constructs
+----------------
+
+only if-else, while loop and functions, nothing more.
+
+
+
+if(condition){
+	logic;
+}
+else{
+	logic;
+}
+
+while(condition){
+	logic;
+}
+
+break #breaks a loop
+continue #continues the next iteration
+
+
+fn function_name(arg:argtype, )(returntype){
+	function logic;
+	return value;
+	
+	
+	
+	
+	
+}
+

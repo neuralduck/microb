@@ -1,0 +1,34 @@
+#This is a comment
+
+x: num = 20;
+y: num = 5;
+
+c: str = "this is a string";
+
+d: num[5] = [1, 2, 3, 4, 5]; #this is a static array
+e: num<5> = [6, 7, 8, 9, 0]; #this is a dynamic array
+
+f: str[3] = ["apple", "bread", "coffee"];
+
+print("no type casting yet");
+
+if(x>y){
+    print("{x}");
+}
+else{
+    print("{y}");
+}
+
+i: int = 0;
+while(i<5){
+    print("count: {i}");
+}
+
+fn add_one(x: num)(num){
+    return(x+1);
+}
+
+n = add_one(3);
+print("{n}");
+
+print("That's it for now, bye");
