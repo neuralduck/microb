@@ -46,7 +46,7 @@ class Token:
     value: str | None
 
     def __repr__(self):
-        return f"{self.token_type.value.upper()}: {self.value}"
+        return f"<{self.token_type.value.upper()}>   {self.value}"
 
 with open("sample.mb", "r") as f:
     code = f.read()
@@ -109,7 +109,36 @@ while i < len(code):
         tokens.append(Token(TokenType.CLOSE_SQUARE, code[i]))
         i+=1
         continue
-    
+    if code[i] == '>':
+        if code[i+1] == '=':
+            tokens.append(Token(TokenType.GREATER_OR_EQUAL, code[i:i+2])) #assuming this doesnt exceed the max length?
+        else:
+            tokens.append(Token(TokenType.GREATER_THAN, code[i]))
+        i+=1
+        continue
+    if code[i] == '<':
+        if code[i+1] == '=':
+            tokens.append(Token(TokenType.LESS_OR_EQUAL, code[i:i+2])) #same as that ^
+        else:
+            tokens.append(Token(TokenType.LESS_THAN, code[i]))
+        i+=1
+        continue
+    if code[i] == '=':
+        if code[i+1] == '=':
+            tokens.append(Token(TokenType.EQUAL, "=="))
+        else:
+            tokens.append(Token(TokenType.ASSIGN, "="))
+        i+=1
+        continue
+    if code[i] == ':':
+        tokens.append(Token(TokenType.COLON, ':'))
+        i+=1
+        continue
+    if code[i] == ';':
+        tokens.append(Token(TokenType.SEMICOLON, ';'))
+        i+=1
+        continue
+
     if code[i] == '"':
         i += 1
         start = i #next character after first "
@@ -136,5 +165,5 @@ while i < len(code):
     i+=1
 
 for token in tokens:
-    print(token, '\n')
+    print(token)
         
