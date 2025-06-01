@@ -1,23 +1,24 @@
 # Test program for lexer
-let x = 42;
-let y = x + 13;
+x: num = 42;
+y: num = x + 13;
 
-def add(a, b) {
-    return a + b;
+fn add(a: num, b: num)(num){
+    return(a + b);
 }
 
-if (y > 50) {
+if(y > 50){
     print("Big number!");
-} else {
+} 
+else{
     print("Small number!");
 }
 
-while (x < 100) {
+while(x < 100){
     x = x + 1;
+    print("value is:", x);
 }
 
-# Function with no return just to be obnoxious
-def log_hello() {
+fn log_hello(null)(null){
     print("Hello from function!");
 }
 

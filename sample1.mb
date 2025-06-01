@@ -13,10 +13,10 @@ f: str[3] = ["apple", "bread", "coffee"];
 print("no type casting yet");
 
 if(x>y){
-    print("{x}");
+    print(x);
 }
 else{
-    print("{y}");
+    print(y);
 }
 
 i: int = 0;

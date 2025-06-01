@@ -1,7 +1,7 @@
 from enum import StrEnum, auto
 from dataclasses import dataclass
-
-KEYWORDS = ("let", "num", "str", "print", "if", "else", "while", "fn", "return", "continue", "break")
+from utils import Green, Red, Cyan, Purple, Yellow
+KEYWORDS = ("let", "num", "str", "null", "print", "if", "else", "while", "fn", "return", "continue", "break")
 class TokenType(StrEnum):
     KEYWORD = auto()
     IDENTIFIER = auto()
@@ -16,7 +16,6 @@ class TokenType(StrEnum):
     
     AND = auto()
     OR = auto()
-
     NOT = auto()
     
     EQUAL = auto()
@@ -39,6 +38,8 @@ class TokenType(StrEnum):
     COLON = auto()
 
     NEW_LINE = auto()
+    EOF = auto()
+
 
 @dataclass
 class Token:
@@ -46,7 +47,7 @@ class Token:
     value: str | None
 
     def __repr__(self):
-        return f"<{self.token_type.value.upper()}>   {self.value}"
+        return f"{Green(self.token_type.value.upper())} {Cyan(self.value)}"
 
 with open("sample2.mb", "r") as f:
     code = f.read()
