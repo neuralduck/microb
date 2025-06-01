@@ -1,0 +1,24 @@
+# Test program for lexer
+let x = 42;
+let y = x + 13;
+
+def add(a, b) {
+    return a + b;
+}
+
+if (y > 50) {
+    print("Big number!");
+} else {
+    print("Small number!");
+}
+
+while (x < 100) {
+    x = x + 1;
+}
+
+# Function with no return just to be obnoxious
+def log_hello() {
+    print("Hello from function!");
+}
+
+log_hello();

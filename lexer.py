@@ -1,7 +1,7 @@
 from enum import StrEnum, auto
 from dataclasses import dataclass
 
-
+KEYWORDS = ("let", "num", "str", "print", "if", "else", "while", "fn", "return", "continue", "break")
 class TokenType(StrEnum):
     KEYWORD = auto()
     IDENTIFIER = auto()
@@ -48,7 +48,7 @@ class Token:
     def __repr__(self):
         return f"<{self.token_type.value.upper()}>   {self.value}"
 
-with open("sample.mb", "r") as f:
+with open("sample2.mb", "r") as f:
     code = f.read()
 
 tokens = []
@@ -63,8 +63,12 @@ while i < len(code):
     if code[i] == '#':
         while code[i] != '\n':
             i+=1
+        i+=1
         continue
     
+    if code[i] == '\n':
+        i+=1
+        continue
     if code[i] == '+':
         tokens.append(Token(TokenType.ADD, code[i]))
         i+=1
@@ -138,6 +142,10 @@ while i < len(code):
         tokens.append(Token(TokenType.SEMICOLON, ';'))
         i+=1
         continue
+    if code[i] == ',':
+        tokens.append(Token(TokenType.COMMA, ','))
+        i+=1
+        continue
 
     if code[i] == '"':
         i += 1
@@ -148,8 +156,6 @@ while i < len(code):
         # print(code[start:i]) #prints without "" included
         tokens.append(Token(TokenType.STRING_LITERAL, code[start:i]))
         i += 1 #shift i to the character after second "
-
-
         continue
     
     if code[i].isnumeric():
@@ -162,8 +168,17 @@ while i < len(code):
         tokens.append(Token(TokenType.NUMBER_LITERAL, code[start:i]))
         continue
     
-    i+=1
-
+    if code[i].isalpha():
+        start = i
+        i += 1
+        while(code[i].isalnum() or code[i] == '_'):
+            i+= 1
+        if code[start:i] in KEYWORDS:
+            tokens.append(Token(TokenType.KEYWORD, code[start:i]))
+        else:
+            tokens.append(Token(TokenType.IDENTIFIER, code[start:i]))
+        continue
+    
 for token in tokens:
     print(token)
         
