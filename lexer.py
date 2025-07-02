@@ -1,9 +1,24 @@
 from enum import StrEnum, auto
 from dataclasses import dataclass
 from utils import Green, Red, Cyan, Purple, Yellow
+
 KEYWORDS = ("let", "num", "str", "null", "print", "if", "else", "while", "fn", "return", "continue", "break")
+
 class TokenType(StrEnum):
     KEYWORD = auto()
+    KW_LET = auto()
+    KW_NUM = auto()
+    KW_STR = auto()
+    KW_NULL = auto()
+    KW_PRINT = auto()
+    KW_IF = auto()
+    KW_ELSE = auto()
+    KW_WHILE = auto()
+    KW_FN = auto()
+    KW_RETURN = auto()
+    KW_CONTINUE = auto()
+    KW_BREAK = auto()
+
     IDENTIFIER = auto()
     NUMBER_LITERAL = auto()
     STRING_LITERAL = auto()
@@ -40,7 +55,20 @@ class TokenType(StrEnum):
     NEW_LINE = auto()
     EOF = auto()
 
-
+KEYWORDS = {
+    "let": TokenType.KW_LET,
+    "num": TokenType.KW_NUM,
+    "str": TokenType.KW_STR,
+    "null": TokenType.KW_NULL,
+    "print": TokenType.KW_PRINT,
+    "if": TokenType.KW_IF,
+    "else": TokenType.KW_ELSE,
+    "while": TokenType.KW_WHILE,
+    "fn": TokenType.KW_FN,
+    "return": TokenType.KW_RETURN,
+    "continue": TokenType.KW_CONTINUE,
+    "break": TokenType.KW_BREAK
+}
 @dataclass
 class Token:
     token_type: TokenType
@@ -48,6 +76,7 @@ class Token:
 
     def __repr__(self):
         return f"{Green(self.token_type.value.upper())} {Cyan(self.value)}"
+
 def get_tokens(code: str) -> list[Token]:
     tokens = []
     i = 0
@@ -171,7 +200,7 @@ def get_tokens(code: str) -> list[Token]:
             while(code[i].isalnum() or code[i] == '_'):
                 i+= 1
             if code[start:i] in KEYWORDS:
-                tokens.append(Token(TokenType.KEYWORD, code[start:i]))
+                tokens.append(Token(KEYWORDS[code[start:i]], code[start:i]))
             else:
                 tokens.append(Token(TokenType.IDENTIFIER, code[start:i]))
             continue
@@ -179,7 +208,7 @@ def get_tokens(code: str) -> list[Token]:
 
 
 if __name__ == "__main__":
-    with open("sample2.mb", "r") as f:
+    with open("sample5.mb", "r") as f:
         code = f.read()
     tokens = get_tokens(code)
     for token in tokens:

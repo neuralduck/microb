@@ -1,0 +1,6 @@
+if(x>y){
+    print("greater");
+}
+else{
+    print("smaller");
+}
